@@ -1,0 +1,117 @@
+{
+  "name": "bot",
+  "version": "0.0.1",
+  "private": true,
+  "main": "build/app.js",
+  "description": "Discord bot to support the React Spring server",
+  "keywords": [
+    "react-spring",
+    "react spring",
+    "discord",
+    "bot"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-spring/discord.git"
+  },
+  "bugs": {
+    "url": "https://github.com/react-spring/discord/issues"
+  },
+  "license": "MIT",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(^.*)/__tests__/(.+(ts|)$)",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.+(ts)",
+      "!<rootDir>/**/*.d.ts",
+      "!<rootDir>/node_modules",
+      "!<rootDir>/**/__tests__/**"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "automock": false,
+    "testEnvironment": "node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix"
+    ]
+  },
+  "scripts": {
+    "start": "npm run start:server",
+    "start:server": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server-dev.js",
+    "start:server-prodlike": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server.js",
+    "clean": "cross-env rm -rf ./build",
+    "build": "cross-env NODE_ENV=production webpack-cli --config webpack.config.server.js",
+    "test": "jest",
+    "test:coverage": "npm test -- --coverage",
+    "test:verbose": "npm test -- --verbose",
+    "test:watch": "npm test -- --watch",
+    "test:watch:verbose": "npm test -- --watch --verbose false",
+    "eslint": "eslint --fix src/**/*.{js,ts}",
+    "deploy": "exit 0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chalk": "^3.0.0",
+    "cors": "^2.8.4",
+    "discord.js": "^12.0.2",
+    "express": "^4.16.3",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.19",
+    "opusscript": "^0.0.7",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.11.1",
+    "@types/jest": "^22.2.3",
+    "@types/lodash": "^4.14.109",
+    "@types/node": "^10.0.7",
+    "@types/uuid": "^3.4.3",
+    "@typescript-eslint/eslint-plugin": "^3.7.0",
+    "@typescript-eslint/parser": "^3.7.0",
+    "@babel/core": "7.10.5",
+    "@babel/preset-env": "7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "5.1.6",
+    "dotenv": "^5.0.1",
+    "dotenv-webpack": "^1.5.5",
+    "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-jest": "^23.17.1",
+    "husky": "^4.2.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^10.2.11",
+    "nodemon-webpack-plugin": "^4.3.2",
+    "prettier": "^2.0.5",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^4.3.0",
+    "ts-node": "^6.0.3",
+    "typescript": "^3.9.7",
+    "webpack": "^4.41.2",
+    "webpack-cli": "3.3.10"
+  }
+}
