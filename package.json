@@ -55,8 +55,8 @@
   },
   "scripts": {
     "start": "npm run start:server",
-    "start:server": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server-dev.js",
-    "start:server-prodlike": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server.js",
+    "start:dev": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server-dev.js",
+    "start:prodlike": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server.js",
     "clean": "cross-env rm -rf ./build",
     "build": "cross-env NODE_ENV=production webpack-cli --config webpack.config.server.js",
     "test": "jest",
