@@ -10,7 +10,7 @@
   </a>
 </p>
 <p align="middle">
-  <i>Use the sandbox environment to test new features before deploying the to the live sever.</i>
+  <i>Use the sandbox environment to test new features before deploying to the live sever.</i>
 </p>
 
 ## Development
