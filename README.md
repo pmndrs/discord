@@ -13,7 +13,8 @@
   <i>Use the sandbox environment to test new features before deploying to the live sever.</i>
 </p>
 
-## Production
+## Prodlike 
+> locally running bot with prodlike settings
 ```bash
 npm install
 
@@ -24,10 +25,11 @@ cp .env.template .env
 npm run build
 
 # start the server
-node .webpack/app.js
+npm run start:prodlike
 ```
 
-## Development
+## Dev
+> locally running bot with development settings
 ```bash
 npm install
 
@@ -35,7 +37,7 @@ npm install
 cp .env.template .env.dev
 
 # start the dev server in watch mode
-npm start
+npm run start:dev
 ```
 
 ### Resources
