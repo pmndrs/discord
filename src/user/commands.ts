@@ -10,19 +10,19 @@ export const COMMAND_ROLES: ICommand = {
   public: true,
   description: 'displays available roles',
   handler: async (msg) => {
-    if (msg.content.match(COMMAND_ROLES.pattern)) {
-      let result = ''
+    const match = COMMAND_ROLES.pattern.exec(msg.content)
+    if (!match) return
 
-      result += '```\n'
-      result += 'Available Helper Roles:\n'
-      Object.keys(ROLES.HELPERS).forEach((role: string, i) => {
-        if (i) result += `, `
-        result += role
-      })
-      result += '```'
+    let result = ''
+    result += '```\n'
+    result += 'Available Helper Roles:\n'
+    Object.keys(ROLES.HELPERS).forEach((role: string, i) => {
+      if (i) result += `, `
+      result += role
+    })
+    result += '```'
 
-      msg.channel.send(result)
-    }
+    msg.channel.send(result)
   },
 }
 
@@ -34,16 +34,16 @@ export const COMMAND_ROLE_ADD: ICommand = {
   description: 'adds a role to the user',
   handler: async (msg) => {
     const match = COMMAND_ROLE_ADD.pattern.exec(msg.content)
-    if (match) {
-      const args = (match[1] || '').toLowerCase()
-      const roles = args.split(' ').map((string) => {
-        const role = ROLES.HELPERS[string]
-        if (!role) throw Error('Role is not available')
-        return role
-      })
-      await msg.member.roles.add([...roles, ROLES.HELPER])
-      await msg.react(EMOJI.SUCCESS)
-    }
+    if (!match) return
+
+    const args = (match[1] || '').toLowerCase()
+    const roles = args.split(' ').map((string) => {
+      const role = ROLES.HELPERS[string]
+      if (!role) throw Error('Role is not available')
+      return role
+    })
+    await msg.member.roles.add([...roles, ROLES.HELPER])
+    await msg.react(EMOJI.SUCCESS)
   },
 }
 
@@ -55,17 +55,17 @@ export const COMMAND_ROLE_REMOVE: ICommand = {
   description: 'removes a role from the user',
   handler: async (msg) => {
     const match = COMMAND_ROLE_REMOVE.pattern.exec(msg.content)
-    if (match) {
-      const args = match[1]
-      const roles = args.split(' ').map((string) => {
-        const role = ROLES.HELPERS[string]
-        if (!role) throw Error('Role is not available')
-        return role
-      })
-      await msg.member.roles.remove(roles)
-      if (hasNoHelperRole(msg)) await msg.member.roles.remove(ROLES.HELPER)
-      await msg.react(EMOJI.SUCCESS)
-    }
+    if (!match) return
+
+    const args = match[1]
+    const roles = args.split(' ').map((string) => {
+      const role = ROLES.HELPERS[string]
+      if (!role) throw Error('Role is not available')
+      return role
+    })
+    await msg.member.roles.remove(roles)
+    if (hasNoHelperRole(msg)) await msg.member.roles.remove(ROLES.HELPER)
+    await msg.react(EMOJI.SUCCESS)
   },
 }
 

@@ -8,16 +8,17 @@ export const COMMAND_HELP: ICommand = {
   patternFriendly: 'help',
   description: 'displays the available commands.',
   handler: async (msg) => {
-    if (msg.content.match(COMMAND_HELP.pattern)) {
-      let result = ''
+    const match = COMMAND_HELP.pattern.exec(msg.content)
+    if (!match) return
 
-      msg.client.data.commands.forEach((command: ICommand) => {
-        if (!command.public) return
-        result += '`' + COMMAND_PREFIX + command.patternFriendly + '`'
-        result += ` - ${command.description}\n`
-      })
+    let result = ''
 
-      msg.channel.send(result)
-    }
+    msg.client.data.commands.forEach((command: ICommand) => {
+      if (!command.public) return
+      result += '`' + COMMAND_PREFIX + command.patternFriendly + '`'
+      result += ` - ${command.description}\n`
+    })
+
+    msg.channel.send(result)
   },
 }
