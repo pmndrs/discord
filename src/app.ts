@@ -32,43 +32,37 @@ client.once('ready', () => {
   registerReactionRemove(USER_REACTIONS.REACTION_REMOVE_UNSIGN)
 
   // invoke watchers
-  client.data.watchers.forEach((watcher) => watcher.handler(client)())
+  client.data.watchers.forEach((w) => w.handler(client)())
 })
 
-client.on('message', (msg) => {
+client.on('message', async (msg) => {
   if (!msg.content.startsWith(COMMAND_PREFIX) || msg.author.bot) return
 
-  client.data.commands.forEach(async (command) => {
-    try {
-      await command.handler(msg)
-    } catch (e) {
-      msg.react(EMOJI.FAIL)
-    }
-  })
+  try {
+    await Promise.all(client.data.commands.map(async (c) => await c.handler(msg)))
+  } catch (e) {
+    msg.react(EMOJI.FAIL)
+  }
 })
 
 client.on('messageReactionAdd', async (reaction, user) => {
   if (user.bot) return
 
-  client.data.reactionsAdd.forEach(async (reactionAdd) => {
-    try {
-      await reactionAdd.handler(client)(reaction, user)
-    } catch (e) {
-      console.log(chalk.redBright('There was an error'))
-    }
-  })
+  try {
+    await Promise.all(client.data.reactionsAdd.map(async (r) => await r.handler(client)(reaction, user)))
+  } catch (e) {
+    console.log(chalk.redBright('There was an error'))
+  }
 })
 
 client.on('messageReactionRemove', async (reaction, user) => {
   if (user.bot) return
 
-  client.data.reactionsRemove.forEach(async (reactionRemove) => {
-    try {
-      await reactionRemove.handler(client)(reaction, user)
-    } catch (e) {
-      console.log(chalk.redBright('There was an error'))
-    }
-  })
+  try {
+    await Promise.all(client.data.reactionsRemove.map(async (r) => await r.handler(client)(reaction, user)))
+  } catch (e) {
+    console.log(chalk.redBright('There was an error'))
+  }
 })
 
 client.on('guildMemberAdd', (member) => {
