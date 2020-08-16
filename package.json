@@ -1,5 +1,5 @@
 {
-  "name": "bot",
+  "name": "discord",
   "version": "0.0.1",
   "private": true,
   "main": "build/app.js",
@@ -58,29 +58,18 @@
     "clean": "cross-env rm -rf ./build",
     "build": "cross-env NODE_ENV=production webpack-cli --config webpack.config.server.js",
     "test": "jest",
-    "test:coverage": "npm test -- --coverage",
-    "test:verbose": "npm test -- --verbose",
-    "test:watch": "npm test -- --watch",
-    "test:watch:verbose": "npm test -- --watch --verbose false",
     "eslint": "eslint --fix src/**/*.{js,ts}",
     "deploy": "exit 0"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
     "chalk": "^3.0.0",
-    "cors": "^2.8.4",
     "discord.js": "^12.0.2",
-    "express": "^4.16.3",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.19",
-    "opusscript": "^0.0.7",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.17.0",
-    "@types/cors": "^2.8.4",
     "@types/dotenv": "^4.0.3",
-    "@types/express": "^4.11.1",
     "@types/jest": "^22.2.3",
     "@types/lodash": "^4.14.109",
     "@types/node": "^10.0.7",

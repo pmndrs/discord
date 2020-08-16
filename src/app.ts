@@ -1,11 +1,6 @@
 /* tslint:disable:no-console */
 import 'isomorphic-fetch'
 
-import * as express from 'express'
-import * as bodyParser from 'body-parser'
-import * as cors from 'cors'
-import * as http from 'http'
-import * as pkg from '../package.json'
 import * as Discord from 'discord.js'
 import * as chalk from 'chalk'
 import { COMMAND_PREFIX, EMOJI, ROLES } from 'registry'
@@ -16,26 +11,12 @@ import * as HELP_COMMANDS from 'help/commands'
 import * as USER_COMMANDS from 'user/commands'
 import * as USER_REACTIONS from 'user/reactions'
 
-const port = process.env.PORT || 7000
-
-export const app = express()
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use('*', cors())
-
-const httpServer = http.createServer(app)
-
-httpServer.listen(port, () => {
-  console.log(`${pkg.name} running in ${process.env.NODE_ENV} mode on port ${port}.`)
-})
-
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 
 client.data = { commands: [], watchers: [], reactionsAdd: [], reactionsRemove: [] }
 
 client.once('ready', () => {
-  console.log(`Discord Bot running as ${client.user.tag}`)
+  console.log(chalk.bold.cyanBright(`Discord Bot running as ${client.user.tag}`))
 
   // register commands
   registerCommand(HELP_COMMANDS.COMMAND_HELP)
@@ -73,7 +54,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
     try {
       await reactionAdd.handler(client)(reaction, user)
     } catch (e) {
-      console.log('There was an error')
+      console.log(chalk.redBright('There was an error'))
     }
   })
 })
@@ -85,19 +66,22 @@ client.on('messageReactionRemove', async (reaction, user) => {
     try {
       await reactionRemove.handler(client)(reaction, user)
     } catch (e) {
-      console.log('There was an error')
+      console.log(chalk.redBright('There was an error'))
     }
   })
 })
 
 client.on('guildMemberAdd', (member) => {
-  // make sure that new members sign the rule book
-  member.roles.add(ROLES.NOT_VERIFIED)
+  try {
+    // ensure that new members sign the rule book
+    member.roles.add(ROLES.NOT_VERIFIED)
+  } catch (e) {
+    console.log(chalk.redBright('There was an error'))
+  }
 })
 
 export const registerCommand = (command: ICommand) => {
   client.data.commands.push(command)
-
   console.log(`${chalk.blueBright('➕ COMMAND ➡️')} ${chalk.yellowBright(`${COMMAND_PREFIX}${command.name}`)}`)
 }
 
@@ -117,5 +101,3 @@ export const registerReactionRemove = (reaction: IReaction) => {
 }
 
 client.login(process.env.BOT_TOKEN)
-
-export default httpServer
