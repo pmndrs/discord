@@ -15,14 +15,27 @@
 
 ## Development
 ```bash
-git clone https://https://github.com/react-spring/discord.git
-cd discord
 npm install
 
-cp .env.template .env.dev
 # fill out the appropriate env variables
+cp .env.template .env.dev
 
+# start the dev server in watch mode
 npm start
+```
+
+## Production
+```bash
+npm install
+
+# fill out the appropriate env variables
+cp .env.template .env
+
+# creates a deployable artifact
+npm run build
+
+# start the server
+node .webpack.server/app.js
 ```
 
 ### Resources

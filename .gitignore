@@ -1,9 +1,6 @@
 .env
 .env.dev
-.serverless
 .webpack.server
 .webpack.server-dev
-.webpack.serverless
-.webpack.serverless-dev
 
 node_modules
