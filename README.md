@@ -13,17 +13,6 @@
   <i>Use the sandbox environment to test new features before deploying to the live sever.</i>
 </p>
 
-## Development
-```bash
-npm install
-
-# fill out the appropriate env variables
-cp .env.template .env.dev
-
-# start the dev server in watch mode
-npm start
-```
-
 ## Production
 ```bash
 npm install
@@ -36,6 +25,17 @@ npm run build
 
 # start the server
 node .webpack.server/app.js
+```
+
+## Development
+```bash
+npm install
+
+# fill out the appropriate env variables
+cp .env.template .env.dev
+
+# start the dev server in watch mode
+npm start
 ```
 
 ### Resources
