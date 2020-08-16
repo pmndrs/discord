@@ -14,4 +14,9 @@ export const HELPER_ROLES = {
   ccapture: process.env.BOT_ROLE_CCAPTURE,
 }
 
-export const PREFIX = process.env.BOT_PREFIX
+export const COMMAND_PREFIX = process.env.BOT_PREFIX
+
+export const EMOJI = {
+  SUCCESS: '✅',
+  FAIL: '❌',
+}

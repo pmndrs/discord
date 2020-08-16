@@ -1,7 +1,7 @@
 import { ICommand } from 'ICommand'
-import { pattern } from '../utils'
-import { HELPER_ROLES, HELPER_ROLE } from 'registry'
+import { EMOJI, HELPER_ROLES, HELPER_ROLE } from 'registry'
 import { Message, PartialMessage } from 'discord.js'
+import { pattern } from 'utils'
 
 export const COMMAND_ROLES: ICommand = {
   name: 'roles',
@@ -36,17 +36,13 @@ export const COMMAND_ROLE_ADD: ICommand = {
     const match = COMMAND_ROLE_ADD.pattern.exec(msg.content)
     if (match) {
       const args = (match[1] || '').toLowerCase()
-      try {
-        const roles = args.split(' ').map((string) => {
-          const role = HELPER_ROLES[string]
-          if (!role) throw Error('Role is not available')
-          return role
-        })
-        await msg.member.roles.add([...roles, HELPER_ROLE])
-        await msg.react('✅')
-      } catch (e) {
-        await msg.react('❌')
-      }
+      const roles = args.split(' ').map((string) => {
+        const role = HELPER_ROLES[string]
+        if (!role) throw Error('Role is not available')
+        return role
+      })
+      await msg.member.roles.add([...roles, HELPER_ROLE])
+      await msg.react(EMOJI.SUCCESS)
     }
   },
 }
@@ -61,19 +57,14 @@ export const COMMAND_ROLE_REMOVE: ICommand = {
     const match = COMMAND_ROLE_REMOVE.pattern.exec(msg.content)
     if (match) {
       const args = match[1]
-
-      try {
-        const roles = args.split(' ').map((string) => {
-          const role = HELPER_ROLES[string]
-          if (!role) throw Error('Role is not available')
-          return role
-        })
-        await msg.member.roles.remove(roles)
-        if (hasNoHelperRole(msg)) await msg.member.roles.remove(HELPER_ROLE)
-        await msg.react('✅')
-      } catch (e) {
-        await msg.react('❌')
-      }
+      const roles = args.split(' ').map((string) => {
+        const role = HELPER_ROLES[string]
+        if (!role) throw Error('Role is not available')
+        return role
+      })
+      await msg.member.roles.remove(roles)
+      if (hasNoHelperRole(msg)) await msg.member.roles.remove(HELPER_ROLE)
+      await msg.react(EMOJI.SUCCESS)
     }
   },
 }
@@ -81,4 +72,3 @@ export const COMMAND_ROLE_REMOVE: ICommand = {
 const hasNoHelperRole = (msg: Message | PartialMessage) => {
   return !Object.values(HELPER_ROLES).find((roleId) => msg.member.roles.cache.find((role) => role.id === roleId))
 }
-// console.log(msg.channel.guild.roles.cache.map(role => role.name))

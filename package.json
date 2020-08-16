@@ -54,7 +54,7 @@
     ]
   },
   "scripts": {
-    "start": "npm run start:server",
+    "start": "npm run start:dev",
     "start:dev": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server-dev.js",
     "start:prodlike": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server.js",
     "clean": "cross-env rm -rf ./build",
