@@ -52,14 +52,14 @@
     ]
   },
   "scripts": {
-    "start": "npm run start:dev",
-    "start:dev": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server-dev.js",
-    "start:prodlike": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.server.js",
+    "start": "node .webpack/app.js",
+    "start:dev": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.dev.js",
+    "start:prodlike": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.prodlike.js",
     "clean": "cross-env rm -rf ./build",
-    "build": "cross-env NODE_ENV=production webpack-cli --config webpack.config.server.js",
+    "build": "cross-env NODE_ENV=production webpack-cli --config webpack.config.js",
     "test": "jest",
     "eslint": "eslint --fix src/**/*.{js,ts}",
-    "deploy": "exit 0"
+    "deploy": "git push heroku master"
   },
   "dependencies": {
     "chalk": "^3.0.0",
@@ -80,6 +80,7 @@
     "@babel/preset-env": "7.10.4",
     "@babel/preset-typescript": "^7.10.4",
     "babel-eslint": "^10.1.0",
+    "copy-webpack-plugin": "^6.0.3",
     "cross-env": "5.1.6",
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
@@ -89,6 +90,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-jest": "^23.17.1",
+    "file-loader": "^6.0.0",
     "husky": "^4.2.5",
     "jest": "^24.9.0",
     "lint-staged": "^10.2.11",

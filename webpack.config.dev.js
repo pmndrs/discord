@@ -24,7 +24,7 @@ module.exports = {
     extensions: ['.js', '.json', '.ts'],
   },
   output: {
-    path: path.join(__dirname, '.webpack.server-dev'),
+    path: path.join(__dirname, '.webpack.dev'),
     filename: 'app.js',
   },
   module: {

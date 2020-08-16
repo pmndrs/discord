@@ -24,7 +24,7 @@ cp .env.template .env
 npm run build
 
 # start the server
-node .webpack.server/app.js
+node .webpack/app.js
 ```
 
 ## Development

@@ -1,6 +1,7 @@
 /* tslint:disable:no-console */
 import 'isomorphic-fetch'
 
+import * as http from 'http'
 import * as Discord from 'discord.js'
 import * as chalk from 'chalk'
 import { COMMAND_PREFIX, EMOJI, ROLES } from 'registry'
@@ -11,12 +12,18 @@ import * as HELP_COMMANDS from 'help/commands'
 import * as USER_COMMANDS from 'user/commands'
 import * as USER_REACTIONS from 'user/reactions'
 
+const port = process.env.PORT || 7000
+
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 
 client.data = { commands: [], watchers: [], reactionsAdd: [], reactionsRemove: [] }
 
 client.once('ready', () => {
-  console.log(chalk.bold.cyanBright(`Discord Bot running as ${client.user.tag}`))
+  console.log(
+    `${chalk.blueBright(`[PORT ${port}] ${process.env.NODE_ENV} ➡️`)} ${chalk.bold.cyanBright(
+      `Discord Bot running as ${client.user.tag}`
+    )}`
+  )
 
   // register commands
   registerCommand(HELP_COMMANDS.COMMAND_HELP)
@@ -94,4 +101,7 @@ export const registerReactionRemove = (reaction: IReaction) => {
   console.log(`${chalk.blueBright('➕ REACTION_REMOVE ➡️')} ${chalk.yellowBright(reaction.name)}`)
 }
 
-client.login(process.env.BOT_TOKEN)
+// must listen on a PORT for heroku to not crash
+const httpServer = http.createServer()
+
+httpServer.listen(port, () => client.login(process.env.BOT_TOKEN))

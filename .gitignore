@@ -1,6 +1,6 @@
 .env
 .env.dev
-.webpack.server
-.webpack.server-dev
+.webpack
+.webpack.dev
 
 node_modules
