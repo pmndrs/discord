@@ -24,6 +24,11 @@ client.once('ready', () => {
     )}`
   )
 
+  client.user.setActivity({
+    type: 'LISTENING',
+    name: `${COMMAND_PREFIX}${HELP_COMMANDS.COMMAND_HELP.patternFriendly}`,
+  })
+
   // register commands
   registerCommand(HELP_COMMANDS.COMMAND_HELP)
   registerCommand(USER_COMMANDS.COMMAND_ROLES)
