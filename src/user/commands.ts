@@ -1,5 +1,5 @@
 import { ICommand } from 'ICommand'
-import { EMOJI, HELPER_ROLES, HELPER_ROLE } from 'registry'
+import { EMOJI, ROLES } from 'registry'
 import { Message, PartialMessage } from 'discord.js'
 import { pattern } from 'utils'
 
@@ -15,7 +15,7 @@ export const COMMAND_ROLES: ICommand = {
 
       result += '```\n'
       result += 'Available Helper Roles:\n'
-      Object.keys(HELPER_ROLES).forEach((role: string, i) => {
+      Object.keys(ROLES.HELPERS).forEach((role: string, i) => {
         if (i) result += `, `
         result += role
       })
@@ -37,11 +37,11 @@ export const COMMAND_ROLE_ADD: ICommand = {
     if (match) {
       const args = (match[1] || '').toLowerCase()
       const roles = args.split(' ').map((string) => {
-        const role = HELPER_ROLES[string]
+        const role = ROLES.HELPERS[string]
         if (!role) throw Error('Role is not available')
         return role
       })
-      await msg.member.roles.add([...roles, HELPER_ROLE])
+      await msg.member.roles.add([...roles, ROLES.HELPER])
       await msg.react(EMOJI.SUCCESS)
     }
   },
@@ -58,17 +58,17 @@ export const COMMAND_ROLE_REMOVE: ICommand = {
     if (match) {
       const args = match[1]
       const roles = args.split(' ').map((string) => {
-        const role = HELPER_ROLES[string]
+        const role = ROLES.HELPERS[string]
         if (!role) throw Error('Role is not available')
         return role
       })
       await msg.member.roles.remove(roles)
-      if (hasNoHelperRole(msg)) await msg.member.roles.remove(HELPER_ROLE)
+      if (hasNoHelperRole(msg)) await msg.member.roles.remove(ROLES.HELPER)
       await msg.react(EMOJI.SUCCESS)
     }
   },
 }
 
 const hasNoHelperRole = (msg: Message | PartialMessage) => {
-  return !Object.values(HELPER_ROLES).find((roleId) => msg.member.roles.cache.find((role) => role.id === roleId))
+  return !Object.values(ROLES.HELPERS).find((roleId) => msg.member.roles.cache.find((role) => role.id === roleId))
 }

@@ -1,4 +1,5 @@
 import { COMMAND_PREFIX } from 'registry'
+import * as Discord from 'discord.js'
 
 export const pattern = {
   build: (base, options: { args?: string; flags?: string } = {}) => {
@@ -7,4 +8,12 @@ export const pattern = {
     if (args) pattern += ` ${args}\\b`
     return new RegExp(pattern, flags)
   },
+}
+
+export const getGuild = (client: Discord.Client) => client.guilds.cache.get(process.env.BOT_GUILD_ID)
+
+export const getMemberByUserId = (client: Discord.Client, userId) => {
+  const guild = getGuild(client)
+  const member = guild.members.cache.get(userId)
+  return member
 }
