@@ -1,4 +1,4 @@
-import { ICommand } from 'ICommand'
+import { ICommand } from 'definitions/ICommand'
 import { EMOJI, ROLES } from 'registry'
 import { Message, PartialMessage } from 'discord.js'
 import { pattern } from 'utils'

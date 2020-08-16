@@ -1,6 +1,6 @@
-import { IReaction } from '../IReaction'
-import { getMemberByUserId } from '../utils'
-import { EMOJI, CHANNELS, ROLES } from '../registry'
+import { IReaction } from 'definitions/IReaction'
+import { getMemberByUserId } from 'utils'
+import { EMOJI, CHANNELS, ROLES } from 'registry'
 
 export const REACTION_ADD_SIGN: IReaction = {
   name: 'sign',

@@ -19,7 +19,7 @@
     "noStrictGenericChecks": true,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "typeRoots": ["./@types", "./node_modules/@types"]
+    "typeRoots": ["./definitions", "./node_modules/@types"]
   },
   "include": ["./**/*"],
   "exclude": [

@@ -1,4 +1,4 @@
-import { ICommand } from 'ICommand'
+import { ICommand } from 'definitions/ICommand'
 import { COMMAND_PREFIX } from 'registry'
 import { pattern } from 'utils'
 
