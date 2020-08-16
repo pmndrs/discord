@@ -1,6 +1,4 @@
 /* tslint:disable:no-console */
-import 'isomorphic-fetch'
-
 import * as http from 'http'
 import * as Discord from 'discord.js'
 import * as chalk from 'chalk'
@@ -11,6 +9,7 @@ import { IReaction } from 'definitions/IReaction'
 import * as HELP_COMMANDS from 'help/commands'
 import * as USER_COMMANDS from 'user/commands'
 import * as USER_REACTIONS from 'user/reactions'
+import { keepAlive } from './keepAlive'
 
 const port = process.env.PORT || 7000
 
@@ -102,6 +101,12 @@ export const registerReactionRemove = (reaction: IReaction) => {
 }
 
 // must listen on a PORT for heroku to not crash
-const httpServer = http.createServer()
+const httpServer = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' })
+  res.end('ok')
+})
 
-httpServer.listen(port, () => client.login(process.env.BOT_TOKEN))
+httpServer.listen(port, () => {
+  client.login(process.env.BOT_TOKEN)
+  keepAlive(process.env.SERVER_URL)
+})
