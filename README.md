@@ -10,23 +10,8 @@
   </a>
 </p>
 <p align="middle">
-  <i>Use the sandbox environment to test new features before deploying to the live sever.</i>
+  <i>Use a sandbox environment to test new features before deploying to the live sever.</i>
 </p>
-
-## Prodlike 
-> locally running bot with prodlike settings
-```bash
-npm install
-
-# fill out the appropriate env variables
-cp .env.template .env
-
-# creates a deployable artifact
-npm run build
-
-# start the server
-npm run start:prodlike
-```
 
 ## Dev
 > locally running bot with development settings
