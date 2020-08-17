@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 var nodeModules = {}
 fs.readdirSync('node_modules')
@@ -36,9 +35,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [{ from: 'package.json' }],
-    }),
-  ],
 }
