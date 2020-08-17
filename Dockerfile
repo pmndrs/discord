@@ -1,9 +1,10 @@
 FROM node:12
 
+ENV HUSKY_SKIP_INSTALL=1
+ENV HUSKY_SKIP_UNINSTALL=1
+
 WORKDIR .
 
-COPY package*.json ./
+COPY . .
 
 RUN npm ci --only=production
-
-COPY . .
