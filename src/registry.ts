@@ -7,13 +7,15 @@ export const ROLES = {
   NOT_VERIFIED: process.env.BOT_ROLE_NOT_VERIFIED,
   HELPERS: {
     'react-spring': process.env.BOT_ROLE_REACT_SPRING,
+    'use-gesture': process.env.BOT_ROLE_USE_GESTURE,
+    zustand: process.env.BOT_ROLE_ZUSTAND,
     'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
+    'react-three-flex': process.env.BOT_ROLE_REACT_THREE_FLEX,
     'react-postprocessing': process.env.BOT_ROLE_REACT_POSTPROCESSING,
     drei: process.env.BOT_ROLE_DREI,
-    zustand: process.env.BOT_ROLE_ZUSTAND,
-    'use-cannon': process.env.BOT_ROLE_USE_CANNON,
     gltfjsx: process.env.BOT_ROLE_GLTFJSX,
-    ccapture: process.env.BOT_ROLE_CCAPTURE,
+    'use-cannon': process.env.BOT_ROLE_USE_CANNON,
+    'use-capture': process.env.BOT_ROLE_USE_CAPTURE,
   },
 }
 
