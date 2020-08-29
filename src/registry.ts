@@ -9,6 +9,7 @@ export const ROLES = {
     'react-spring': process.env.BOT_ROLE_REACT_SPRING,
     'use-gesture': process.env.BOT_ROLE_USE_GESTURE,
     zustand: process.env.BOT_ROLE_ZUSTAND,
+    jotai: process.env.BOT_ROLE_JOTAI,
     'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
     'react-three-flex': process.env.BOT_ROLE_REACT_THREE_FLEX,
     'react-postprocessing': process.env.BOT_ROLE_REACT_POSTPROCESSING,
