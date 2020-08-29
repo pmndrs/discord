@@ -7,7 +7,7 @@ export const ROLES = {
   NOT_VERIFIED: process.env.BOT_ROLE_NOT_VERIFIED,
   HELPERS: {
     'react-spring': process.env.BOT_ROLE_REACT_SPRING,
-    'use-gesture': process.env.BOT_ROLE_USE_GESTURE,
+    'react-use-gesture': process.env.BOT_ROLE_REACT_USE_GESTURE,
     zustand: process.env.BOT_ROLE_ZUSTAND,
     jotai: process.env.BOT_ROLE_JOTAI,
     'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
