@@ -13,6 +13,7 @@ export const ROLES = {
     'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
     'react-three-flex': process.env.BOT_ROLE_REACT_THREE_FLEX,
     'react-postprocessing': process.env.BOT_ROLE_REACT_POSTPROCESSING,
+    'react-xr': process.env.BOT_ROLE_REACT_XR,
     drei: process.env.BOT_ROLE_DREI,
     gltfjsx: process.env.BOT_ROLE_GLTFJSX,
     'use-cannon': process.env.BOT_ROLE_USE_CANNON,
