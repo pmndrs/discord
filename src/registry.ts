@@ -2,22 +2,38 @@ export const CHANNELS = {
   WELCOME: process.env.BOT_CHANNEL_WELCOME,
 }
 
+export const ROLES_HELPERS_GENERAL = {
+  javascript: process.env.BOT_ROLE_JAVASCRIPT,
+  typescript: process.env.BOT_ROLE_TYPESCRIPT,
+  react: process.env.BOT_ROLE_REACT,
+  css: process.env.BOT_ROLE_CSS,
+}
+
+export const ROLES_HELPERS_LIBRARIES = {
+  'react-spring': process.env.BOT_ROLE_REACT_SPRING,
+  'react-use-gesture': process.env.BOT_ROLE_REACT_USE_GESTURE,
+  zustand: process.env.BOT_ROLE_ZUSTAND,
+  jotai: process.env.BOT_ROLE_JOTAI,
+}
+
+export const ROLES_HELPERS_LIBRARIES_3D = {
+  'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
+  'react-three-flex': process.env.BOT_ROLE_REACT_THREE_FLEX,
+  'react-postprocessing': process.env.BOT_ROLE_REACT_POSTPROCESSING,
+  'react-xr': process.env.BOT_ROLE_REACT_XR,
+  drei: process.env.BOT_ROLE_DREI,
+  gltfjsx: process.env.BOT_ROLE_GLTFJSX,
+  'use-cannon': process.env.BOT_ROLE_USE_CANNON,
+  'use-capture': process.env.BOT_ROLE_USE_CAPTURE,
+}
+
 export const ROLES = {
   HELPER: process.env.BOT_ROLE_HELPER,
   NOT_VERIFIED: process.env.BOT_ROLE_NOT_VERIFIED,
   HELPERS: {
-    'react-spring': process.env.BOT_ROLE_REACT_SPRING,
-    'react-use-gesture': process.env.BOT_ROLE_REACT_USE_GESTURE,
-    zustand: process.env.BOT_ROLE_ZUSTAND,
-    jotai: process.env.BOT_ROLE_JOTAI,
-    'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
-    'react-three-flex': process.env.BOT_ROLE_REACT_THREE_FLEX,
-    'react-postprocessing': process.env.BOT_ROLE_REACT_POSTPROCESSING,
-    'react-xr': process.env.BOT_ROLE_REACT_XR,
-    drei: process.env.BOT_ROLE_DREI,
-    gltfjsx: process.env.BOT_ROLE_GLTFJSX,
-    'use-cannon': process.env.BOT_ROLE_USE_CANNON,
-    'use-capture': process.env.BOT_ROLE_USE_CAPTURE,
+    ...ROLES_HELPERS_GENERAL,
+    ...ROLES_HELPERS_LIBRARIES,
+    ...ROLES_HELPERS_LIBRARIES_3D,
   },
 }
 

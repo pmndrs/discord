@@ -1,7 +1,8 @@
 import { ICommand } from 'definitions/ICommand'
-import { EMOJI, ROLES } from 'registry'
+import { EMOJI, ROLES, COMMAND_PREFIX } from 'registry'
 import { Message, PartialMessage } from 'discord.js'
 import { pattern } from 'utils'
+import { ROLES_HELPERS_GENERAL, ROLES_HELPERS_LIBRARIES, ROLES_HELPERS_LIBRARIES_3D } from '../registry'
 
 export const COMMAND_ROLES: ICommand = {
   name: 'roles',
@@ -14,12 +15,27 @@ export const COMMAND_ROLES: ICommand = {
     if (!match) return
 
     let result = ''
-    result += '```\n'
-    result += 'Available Helper Roles:\n'
-    Object.keys(ROLES.HELPERS).forEach((role: string, i) => {
+    result += '```bash\n'
+    result += `${COMMAND_PREFIX}${COMMAND_ROLE_ADD.patternFriendly}\n`
+
+    result += '\n# General:\n'
+    Object.keys(ROLES_HELPERS_GENERAL).forEach((role: string, i) => {
       if (i) result += `, `
       result += role
     })
+
+    result += '\n\n# Libraries:\n'
+    Object.keys(ROLES_HELPERS_LIBRARIES).forEach((role: string, i) => {
+      if (i) result += `, `
+      result += role
+    })
+
+    result += '\n\n# Libraries (3D):\n'
+    Object.keys(ROLES_HELPERS_LIBRARIES_3D).forEach((role: string, i) => {
+      if (i) result += `, `
+      result += role
+    })
+
     result += '```'
 
     msg.channel.send(result)
