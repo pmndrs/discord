@@ -24,7 +24,6 @@ export const ROLES_HELPERS_LIBRARIES_3D = {
   drei: process.env.BOT_ROLE_DREI,
   gltfjsx: process.env.BOT_ROLE_GLTFJSX,
   'use-cannon': process.env.BOT_ROLE_USE_CANNON,
-  'use-capture': process.env.BOT_ROLE_USE_CAPTURE,
 }
 
 export const ROLES = {
