@@ -23,7 +23,7 @@ export const ROLES_HELPERS_LIBRARIES_3D = {
   'react-xr': process.env.BOT_ROLE_REACT_XR,
   drei: process.env.BOT_ROLE_DREI,
   gltfjsx: process.env.BOT_ROLE_GLTFJSX,
-  'use-cannon': process.env.BOT_ROLE_USE_CANNON,
+  'cannon-es': process.env.BOT_ROLE_CANNON_ES,
 }
 
 export const ROLES = {
