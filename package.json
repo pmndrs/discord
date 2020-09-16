@@ -1,21 +1,20 @@
 {
-  "name": "discord",
+  "name": "@pmndrs/discord",
   "version": "0.0.1",
   "private": true,
   "main": "build/app.js",
-  "description": "Discord bot to support the React Spring server",
+  "description": "Discord bot to support the Poimandres server",
   "keywords": [
-    "react-spring",
-    "react spring",
+    "poimandres",
     "discord",
     "bot"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-spring/discord.git"
+    "url": "git+https://github.com/poimandres/discord.git"
   },
   "bugs": {
-    "url": "https://github.com/react-spring/discord/issues"
+    "url": "https://github.com/poimandres/discord/issues"
   },
   "license": "MIT",
   "jest": {
