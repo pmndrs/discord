@@ -1,4 +1,6 @@
 /* tslint:disable:no-console */
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import * as http from 'http'
 import * as Discord from 'discord.js'
 import * as chalk from 'chalk'
@@ -16,13 +18,8 @@ const port = process.env.PORT || 7000
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] })
 
 client.data = { commands: [], watchers: [], reactionsAdd: [], reactionsRemove: [] }
-
 client.once('ready', () => {
-  console.log(
-    `${chalk.blueBright(`[PORT ${port}] ${process.env.NODE_ENV} ➡️`)} ${chalk.bold.cyanBright(
-      `Discord Bot running as ${client.user.tag}`
-    )}`
-  )
+  console.log(`${chalk.blueBright('[discord-bot]')} ${client.user.tag} ready on port ${port} (${process.env.NODE_ENV})`)
 
   client.user.setActivity({
     type: 'LISTENING',

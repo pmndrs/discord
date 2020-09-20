@@ -11,10 +11,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/poimandres/discord.git"
+    "url": "git+https://github.com/pmndrs/discord.git"
   },
   "bugs": {
-    "url": "https://github.com/poimandres/discord/issues"
+    "url": "https://github.com/pmndrs/discord/issues"
   },
   "license": "MIT",
   "jest": {
@@ -52,9 +52,8 @@
   },
   "scripts": {
     "start": "node .webpack/app.js",
-    "start:dev": "cross-env NODE_ENV=development webpack-cli --watch --config webpack.config.dev.js",
-    "start:prodlike": "cross-env NODE_ENV=production webpack-cli --watch --config webpack.config.prodlike.js",
-    "clean": "cross-env rm -rf ./build",
+    "start:dev": "cross-env NODE_ENV=development webpack-cli -w --config webpack.config.js --display errors-only",
+    "start:prodlike": "cross-env NODE_ENV=development PRODLIKE=true webpack-cli -w --config webpack.config.js --display errors-only",
     "build": "cross-env NODE_ENV=production webpack-cli --config webpack.config.js",
     "test": "jest",
     "eslint": "eslint --fix src/**/*.{js,ts}",
@@ -79,13 +78,14 @@
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "core-js": "^3.6.5",
     "cross-env": "5.1.6",
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
     "eslint": "^7.5.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.17.1",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
@@ -96,7 +96,7 @@
     "ts-jest": "^26.3.0",
     "ts-loader": "^4.3.0",
     "ts-node": "^6.0.3",
-    "typescript": "^3.9.7",
+    "typescript": "^4.0.3",
     "webpack": "^4.41.2",
     "webpack-cli": "3.3.10"
   }

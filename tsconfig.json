@@ -21,15 +21,5 @@
     "skipLibCheck": true,
     "typeRoots": ["./definitions", "./node_modules/@types"]
   },
-  "include": ["./**/*"],
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "coverage"
-  ]
+  "exclude": ["node_modules"]
 }
