@@ -12,7 +12,7 @@ export const ROLES_HELPERS_GENERAL = {
 export const ROLES_HELPERS_LIBRARIES = {
   'react-spring': process.env.BOT_ROLE_REACT_SPRING,
   'react-use-gesture': process.env.BOT_ROLE_REACT_USE_GESTURE,
-  'react-use-tweaks': process.env.BOT_ROLE_REACT_USE_TWEAKS,
+  'use-tweaks': process.env.BOT_ROLE_USE_TWEAKS,
   zustand: process.env.BOT_ROLE_ZUSTAND,
   jotai: process.env.BOT_ROLE_JOTAI,
   valtio: process.env.BOT_ROLE_VALTIO,
