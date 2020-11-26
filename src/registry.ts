@@ -12,8 +12,10 @@ export const ROLES_HELPERS_GENERAL = {
 export const ROLES_HELPERS_LIBRARIES = {
   'react-spring': process.env.BOT_ROLE_REACT_SPRING,
   'react-use-gesture': process.env.BOT_ROLE_REACT_USE_GESTURE,
+  'react-use-tweaks': process.env.BOT_ROLE_REACT_USE_TWEAKS,
   zustand: process.env.BOT_ROLE_ZUSTAND,
   jotai: process.env.BOT_ROLE_JOTAI,
+  valtio: process.env.BOT_ROLE_VALTIO,
 }
 
 export const ROLES_HELPERS_LIBRARIES_3D = {
@@ -23,6 +25,7 @@ export const ROLES_HELPERS_LIBRARIES_3D = {
   'react-xr': process.env.BOT_ROLE_REACT_XR,
   drei: process.env.BOT_ROLE_DREI,
   gltfjsx: process.env.BOT_ROLE_GLTFJSX,
+  'react-three-cannon': process.env.BOT_ROLE_REACT_THREE_CANNON,
   'cannon-es': process.env.BOT_ROLE_CANNON_ES,
 }
 
