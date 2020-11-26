@@ -10,6 +10,7 @@ import { IWatcher } from 'definitions/IWatcher'
 import { IReaction } from 'definitions/IReaction'
 import * as HELP_COMMANDS from 'help/commands'
 import * as USER_COMMANDS from 'user/commands'
+import * as USER_WATCHERS from 'user/watchers'
 import * as USER_REACTIONS from 'user/reactions'
 import { keepAlive } from './keepAlive'
 
@@ -34,6 +35,7 @@ client.once('ready', () => {
 
   // register watchers
   // registerWatcher(WATCHER_ONLINE_USERS);
+  registerWatcher(USER_WATCHERS.WATCHER_UNFORMATTED_CODE)
 
   // register reactions
   registerReactionAdd(USER_REACTIONS.REACTION_ADD_SIGN)
