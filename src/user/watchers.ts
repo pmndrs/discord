@@ -9,13 +9,20 @@ export const WATCHER_UNFORMATTED_CODE: IWatcher = {
       const codeblocks = msg.content.match(/```(.|\n)*?```/g)
       const invalidCode = codeblocks?.some((codeblock) => /```\n((.|\n)*?)```/g.test(codeblock))
 
-      // escape early if codeblock already has an id.
-      if (msg.author.bot || !invalidCode ) return
-      if (!!(codeTipCount % 3)) return
-      codeTipCount++
+      if (
+        msg.author.bot ||
+        // escape early if codeblock already has an id.
+        !invalidCode ||
+        // only display the tip every N times
+        !!(codeTipCount++ % parseInt(process.env.TIP_FREQUENCY))
+      ) {
+        return
+      }
+
       let result = ''
       // eslint-disable-next-line prettier/prettier
-      result += '**TIP**: Discord supports syntax highlighting. Decorate the first **\\`\\`\\`** of a code block with a language id (ts, js, jsx, css, html, bash).\n'
+      result +=
+        '**TIP**: Discord supports syntax highlighting. Decorate the first **\\`\\`\\`** of a code block with a language id (ts, js, jsx, css, html, bash).\n'
 
       // eslint-disable-next-line prettier/prettier
       result += '\\`\\`\\`ts\n'
