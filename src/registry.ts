@@ -31,7 +31,6 @@ export const ROLES_HELPERS_LIBRARIES_3D = {
 
 export const ROLES = {
   HELPER: process.env.BOT_ROLE_HELPER,
-  NOT_VERIFIED: process.env.BOT_ROLE_NOT_VERIFIED,
   HELPERS: {
     ...ROLES_HELPERS_GENERAL,
     ...ROLES_HELPERS_LIBRARIES,
