@@ -5,7 +5,7 @@ let codeTipCount = 0
 export const WATCHER_UNFORMATTED_CODE: IWatcher = {
   name: 'unformatted code',
   handler: (client) => async () => {
-    client.on('message', (msg) => {
+    client.on('message', async (msg) => {
       const codeblocks = msg.content.match(/```(.|\n)*?```/g)
       const invalidCode = codeblocks?.some((codeblock) => /```\n((.|\n)*?)```/g.test(codeblock))
 
@@ -34,7 +34,10 @@ export const WATCHER_UNFORMATTED_CODE: IWatcher = {
       result += `console.log('output', 'Hello World')\n`
       result += '```\n'
 
-      msg.channel.send(result)
+      const message = await msg.channel.send(result)
+
+      const timeout = parseInt(process.env.TIP_DURATION)
+      if (timeout) message.delete({ timeout })
     })
   },
 }
