@@ -20,13 +20,16 @@ export const ROLES_HELPERS_LIBRARIES = {
 
 export const ROLES_HELPERS_LIBRARIES_3D = {
   'react-three-fiber': process.env.BOT_ROLE_REACT_THREE_FIBER,
+  'react-three-gltfjsx': process.env.BOT_ROLE_REACT_THREE_GLTFJSX,
+  'react-three-drei': process.env.BOT_ROLE_REACT_THREE_DREI,
+  'react-three-postprocessing': process.env.BOT_ROLE_REACT_THREE_POSTPROCESSING,
   'react-three-flex': process.env.BOT_ROLE_REACT_THREE_FLEX,
-  'react-postprocessing': process.env.BOT_ROLE_REACT_POSTPROCESSING,
-  'react-xr': process.env.BOT_ROLE_REACT_XR,
-  drei: process.env.BOT_ROLE_DREI,
-  gltfjsx: process.env.BOT_ROLE_GLTFJSX,
+  'react-three-xr': process.env.BOT_ROLE_REACT_THREE_XR,
+  'react-three-next': process.env.BOT_ROLE_REACT_THREE_NEXT,
+  'react-three-a11y': process.env.BOT_ROLE_REACT_THREE_A11Y,
   'react-three-cannon': process.env.BOT_ROLE_REACT_THREE_CANNON,
   'cannon-es': process.env.BOT_ROLE_CANNON_ES,
+  'component-material': process.env.BOT_ROLE_COMPONENT_MATERIAL,
 }
 
 export const ROLES = {
