@@ -1,8 +1,11 @@
 import { ICommand } from 'definitions/ICommand'
-import { EMOJI, ROLES, COMMAND_PREFIX } from 'registry'
+import { HELPER_ROLE_CATEGORY, IHelperRole } from 'definitions/IHelperRole'
+import { EMOJI, COMMAND_PREFIX } from 'registry'
 import { Message, PartialMessage } from 'discord.js'
-import { pattern } from 'utils'
-import { ROLES_HELPERS_GENERAL, ROLES_HELPERS_LIBRARIES, ROLES_HELPERS_LIBRARIES_3D } from '../registry'
+import { pattern, toPascalCase } from 'utils'
+import { getAll } from 'db/utils'
+import { DiscordDB } from 'db/redis'
+import { UID_SCOPES } from 'db/scopes'
 
 export const COMMAND_ROLES: ICommand = {
   name: 'roles',
@@ -14,26 +17,24 @@ export const COMMAND_ROLES: ICommand = {
     const match = COMMAND_ROLES.pattern.exec(msg.content)
     if (!match) return
 
+    const roles = await getAll<IHelperRole>(DiscordDB, UID_SCOPES.HELPER_ROLE)
+    const filteredRoles = roles.reduce((acc, role) => {
+      if (!acc[role.category]) acc[role.category] = []
+      acc[role.category].push(role)
+      return acc
+    }, {} as { [key in HELPER_ROLE_CATEGORY]: IHelperRole[] })
+
     let result = ''
     result += '```bash\n'
-    result += `${COMMAND_PREFIX}${COMMAND_ROLE_ADD.patternFriendly}\n`
+    result += `${COMMAND_PREFIX}${COMMAND_ROLE_ADD.patternFriendly}`
 
-    result += '\n# General:\n'
-    Object.keys(ROLES_HELPERS_GENERAL).forEach((role: string, i) => {
-      if (i) result += `, `
-      result += role
-    })
-
-    result += '\n\n# Libraries:\n'
-    Object.keys(ROLES_HELPERS_LIBRARIES).forEach((role: string, i) => {
-      if (i) result += `, `
-      result += role
-    })
-
-    result += '\n\n# Libraries (3D):\n'
-    Object.keys(ROLES_HELPERS_LIBRARIES_3D).forEach((role: string, i) => {
-      if (i) result += `, `
-      result += role
+    Object.keys(HELPER_ROLE_CATEGORY).forEach((category) => {
+      if (!filteredRoles[category]) return
+      result += `\n\n# ${toPascalCase(category)}:\n`
+      filteredRoles[category].forEach((role, i) => {
+        if (i) result += `, `
+        result += role.name
+      })
     })
 
     result += '```'
@@ -53,12 +54,14 @@ export const COMMAND_ROLE_ADD: ICommand = {
     if (!match) return
 
     const args = (match[1] || '').toLowerCase()
-    const roles = args.split(' ').map((string) => {
-      const role = ROLES.HELPERS[string]
+    const roles = await getAll<IHelperRole>(DiscordDB, UID_SCOPES.HELPER_ROLE)
+    const rolesEntries = Object.entries(roles)
+    const inputRoles = args.split(' ').map((string) => {
+      const role = rolesEntries[string]
       if (!role) throw Error('Role is not available')
       return role
     })
-    await msg.member.roles.add([...roles, ROLES.HELPER])
+    await msg.member.roles.add([...inputRoles, process.env.BOT_ROLE_HELPER])
     await msg.react(EMOJI.SUCCESS)
   },
 }
@@ -74,17 +77,20 @@ export const COMMAND_ROLE_REMOVE: ICommand = {
     if (!match) return
 
     const args = match[1]
-    const roles = args.split(' ').map((string) => {
-      const role = ROLES.HELPERS[string]
+    const roles = await getAll<IHelperRole>(DiscordDB, UID_SCOPES.HELPER_ROLE)
+    const rolesEntries = Object.entries(roles)
+    const inputRoles = args.split(' ').map((string) => {
+      const role = rolesEntries[string]
       if (!role) throw Error('Role is not available')
       return role
     })
-    await msg.member.roles.remove(roles)
-    if (hasNoHelperRole(msg)) await msg.member.roles.remove(ROLES.HELPER)
+    await msg.member.roles.remove(inputRoles)
+    if (await hasNoHelperRole(msg)) await msg.member.roles.remove(process.env.BOT_ROLE_HELPER)
     await msg.react(EMOJI.SUCCESS)
   },
 }
 
-const hasNoHelperRole = (msg: Message | PartialMessage) => {
-  return !Object.values(ROLES.HELPERS).find((roleId) => msg.member.roles.cache.find((role) => role.id === roleId))
+const hasNoHelperRole = async (msg: Message | PartialMessage) => {
+  const roles = await getAll<IHelperRole>(DiscordDB, UID_SCOPES.HELPER_ROLE)
+  return !roles.find((role) => msg.member.roles.cache.find((activeRole) => activeRole.id === role.uid))
 }

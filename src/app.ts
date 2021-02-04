@@ -97,7 +97,7 @@ const httpServer = http.createServer((req, res) => {
   res.end('ok')
 })
 
-httpServer.listen(port, () => {
-  client.login(process.env.BOT_TOKEN)
+httpServer.listen(port, async () => {
+  await client.login(process.env.BOT_TOKEN)
   keepAlive(process.env.SERVER_URL)
 })
