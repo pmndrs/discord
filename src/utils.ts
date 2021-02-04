@@ -17,3 +17,11 @@ export const getMemberByUserId = (client: Discord.Client, userId) => {
   const member = guild.members.cache.get(userId)
   return member
 }
+
+export const toPascalCase = (s: string) =>
+  s
+    ? s
+        .split('_')
+        .join(' ')
+        .replace(/\w+/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase())
+    : s
