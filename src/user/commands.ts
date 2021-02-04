@@ -55,11 +55,10 @@ export const COMMAND_ROLE_ADD: ICommand = {
 
     const args = (match[1] || '').toLowerCase()
     const roles = await getAll<IHelperRole>(DiscordDB, UID_SCOPES.HELPER_ROLE)
-    const rolesEntries = Object.entries(roles)
     const inputRoles = args.split(' ').map((string) => {
-      const role = rolesEntries[string]
+      const role = roles.find((role) => role.name === string)
       if (!role) throw Error('Role is not available')
-      return role
+      return role.uid
     })
     await msg.member.roles.add([...inputRoles, process.env.BOT_ROLE_HELPER])
     await msg.react(EMOJI.SUCCESS)
@@ -78,11 +77,10 @@ export const COMMAND_ROLE_REMOVE: ICommand = {
 
     const args = match[1]
     const roles = await getAll<IHelperRole>(DiscordDB, UID_SCOPES.HELPER_ROLE)
-    const rolesEntries = Object.entries(roles)
     const inputRoles = args.split(' ').map((string) => {
-      const role = rolesEntries[string]
+      const role = roles.find((role) => role.name === string)
       if (!role) throw Error('Role is not available')
-      return role
+      return role.uid
     })
     await msg.member.roles.remove(inputRoles)
     if (await hasNoHelperRole(msg)) await msg.member.roles.remove(process.env.BOT_ROLE_HELPER)
