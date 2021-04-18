@@ -9,7 +9,6 @@ import { ICommand } from 'definitions/ICommand'
 import { IWatcher } from 'definitions/IWatcher'
 import { IReaction } from 'definitions/IReaction'
 import * as HELP_COMMANDS from 'help/commands'
-import * as USER_COMMANDS from 'user/commands'
 import * as USER_WATCHERS from 'user/watchers'
 import { keepAlive } from './keepAlive'
 
@@ -28,9 +27,6 @@ client.once('ready', () => {
 
   // register commands
   registerCommand(HELP_COMMANDS.COMMAND_HELP)
-  registerCommand(USER_COMMANDS.COMMAND_ROLES)
-  registerCommand(USER_COMMANDS.COMMAND_ROLE_ADD)
-  registerCommand(USER_COMMANDS.COMMAND_ROLE_REMOVE)
 
   // register watchers
   registerWatcher(USER_WATCHERS.WATCHER_UNFORMATTED_CODE)
